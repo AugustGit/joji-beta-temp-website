@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ca.joji",
+      "sha256_cert_fingerprints": [
+        "25:6C:47:64:CA:04:F4:14:7A:9A:FA:4C:D7:7E:98:DA:D5:81:EF:4D:CC:A6:97:58:5A:A2:61:99:51:E5:E0:A6"
+      ]
+    }
+  }
+]

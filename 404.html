@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connect on Joji</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --forest: #33513b;
+      --forest-deep: #203227;
+      --lime: #9ad891;
+      --teal: #2bb6ad;
+      --paper: #faf9f5;
+      --ink: #1a201b;
+      --muted: #657068;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.5 "Nunito Sans", "Avenir Next", sans-serif;
+    }
+
+    main {
+      width: min(100%, 520px);
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--forest);
+      box-shadow: 0 18px 50px rgba(32, 50, 39, .18);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 28px 0;
+      color: white;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand img { width: 40px; height: 40px; object-fit: contain; }
+
+    .content { padding: 52px 28px 32px; }
+    h1 {
+      max-width: 420px;
+      margin: 0 0 14px;
+      color: var(--lime);
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0; color: rgba(255, 255, 255, .78); }
+    .identity {
+      margin-top: 18px;
+      overflow-wrap: anywhere;
+      color: white;
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    a {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .primary { background: var(--teal); color: white; }
+    .secondary { border: 1px solid rgba(255, 255, 255, .35); color: white; }
+    a:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+    footer {
+      padding: 18px 28px;
+      background: var(--forest-deep);
+      color: rgba(255, 255, 255, .58);
+      font-size: .88rem;
+    }
+
+    @media (max-width: 420px) {
+      body { padding: 12px; }
+      .content { padding: 42px 22px 26px; }
+      .brand { padding-inline: 22px; }
+      footer { padding-inline: 22px; }
+      .actions a { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">
+      <img src="/beta/logo/joji_logo.png" alt="Joji">
+      <span>Joji</span>
+    </div>
+    <section class="content" aria-labelledby="title">
+      <h1 id="title">Connect on Joji</h1>
+      <p>This QR code links to a Joji profile. Open it in the app to send a connection request, or continue browsing beta.joji.ca.</p>
+      <p class="identity" id="identity"></p>
+      <div class="actions">
+        <a class="primary" id="open-app" href="#">Open in Joji</a>
+        <a class="secondary" href="/">Continue to beta.joji.ca</a>
+      </div>
+    </section>
+    <footer>Joji beta</footer>
+  </main>
+
+  <script>
+    (function () {
+      var match = window.location.pathname.match(/^\/connect\/([^/]+)\/([^/]+)\/?$/);
+      var openApp = document.getElementById('open-app');
+      var identity = document.getElementById('identity');
+
+      if (!match) {
+        identity.textContent = 'The page you requested could not be found.';
+        openApp.style.display = 'none';
+        return;
+      }
+
+      var profileId = decodeURIComponent(match[1]);
+      var aliasId = decodeURIComponent(match[2]);
+      var appUrl = 'joji://connect/' + encodeURIComponent(profileId) + '/' + encodeURIComponent(aliasId);
+      identity.textContent = 'Profile: ' + profileId;
+      openApp.href = appUrl;
+    }());
+  </script>
+</body>
+</html>
